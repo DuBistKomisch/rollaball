@@ -28,12 +28,11 @@ public class PlayerController : MonoBehaviour {
   }
 
   void FixedUpdate() {
-    float moveHorizontal = Input.GetAxis("Horizontal");
-    float moveVertical = Input.GetAxis("Vertical");
-
-    Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
-    this.rb.AddForce(movement * this.speed);
+    this.rb.AddForce(
+      (Input.GetAxis("Horizontal") + Input.acceleration.x) * this.speed,
+      0,
+      (Input.GetAxis("Vertical") + Input.acceleration.y) * this.speed
+    );
   }
 
   void OnTriggerEnter(Collider other) {
